@@ -1,78 +1,198 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Talha Demir / Alyas</title>
+  <meta charset="UTF-8">
+  <title>Talha Demir</title>
+  <link href="https://fonts.googleapis.com/css2?family=Special+Gothic+Condensed+One&display=swap" rel="stylesheet">
+  <style>
+    body {
+      margin: 0;
+      height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background: #ffffff;
+      font-family: 'Special Gothic Condensed One', sans-serif;
+    }
 
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Chivo+Mono:wght@100;200;300;400;500;600;700;800;900&family=Kanit:wght@500&family=Montserrat:wght@300&family=Oswald:wght@300;500&family=Roboto+Mono:wght@300&display=swap" rel="stylesheet">
-    <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Chivo+Mono:wght@100;200;300;400;500;600;700;800;900&family=Montserrat:wght@300&family=Oswald:wght@300;500&family=Roboto+Mono:wght@300&family=Slabo+27px&display=swap" rel="stylesheet">
-    <link rel="icon" type="image/png" href="images/tabicon.png">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Chivo+Mono:wght@100;200;300;400;500;600;700;800;900&family=Montserrat:wght@300&family=Oswald:wght@300;500&family=Roboto+Mono:wght@300&family=Slabo+27px&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="style.css">
+    .timer {
+      display: flex;
+      flex-direction: column;
+      align-items: center; 
+      gap: 1rem;
+    }
 
+    .time-unit {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .number {
+      font-size: 4rem;
+      color: #000000;
+      min-width: 80px;
+      text-align: center;
+      transition: transform 0.3s ease-in-out, opacity 0.3s ease-in-out;
+      position: relative;
+    }
+
+    .upper .number {
+      font-size: 5rem;
+    }
+
+    .middle .number {
+      font-size: 4.5rem;
+    }
+
+    .lower .number {
+      font-size: 3.5rem;
+    }
+
+    .unit-label {
+      font-size: 1.2rem;
+      color: #000000;
+    }
+
+   
+    .number-up, .number-down {
+      animation: slideUpDown 0.5s ease-in-out;
+    }
+
+    @keyframes slideUpDown {
+      0% {
+        transform: translateY(-20px);
+        opacity: 0;
+      }
+      50% {
+        transform: translateY(0);
+        opacity: 1;
+      }
+      100% {
+        transform: translateY(20px);
+        opacity: 0;
+      }
+    }
+  </style>
 </head>
 <body>
+  <div class="timer">
+    <div class="time-unit" id="years-unit">
+      <div class="number" id="years"></div>
+      <div class="unit-label">Year</div>
+    </div>
 
-    <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
-    <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
+    <div class="time-unit" id="months-unit">
+      <div class="number" id="months"></div>
+      <div class="unit-label">Month</div>
+    </div>
 
-    <section class="dark">
-        <h1>I am  <span class="input"></span></h1>        
-    
-    </section>
-    <section class="green">
-        <h2>My life / purposes.</h2>
-        <p>Hi, I'm just a high school student that get interested in codes and Im not that good at this of course. I wanna be a computer engineer in future and 
-            I have been writing code since 2021 and Im using HTML/Python/CSS. My purpose for making this website is just improve my self in HTML, nothing more...
-            (so dont send me mail about marketing pls its just training website) That's it, if you have any suggestion for me to improve myself, you can feel free to send me mail.
-                  
-            </p>
-            
-            <p class="social-font"><span class="higlight-word-color">My Social Links / Mail down below</span></p>    
+    <div class="time-unit" id="days-unit">
+      <div class="number" id="days"></div>
+      <div class="unit-label">Day</div>
+    </div>
 
-        <div class="wavetop">
-            <svg data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 120" preserveAspectRatio="none">
-                <path d="M321.39,56.44c58-10.79,114.16-30.13,172-41.86,82.39-16.72,168.19-17.73,250.45-.39C823.78,31,906.67,72,985.66,92.83c70.05,18.48,146.53,26.09,214.34,3V0H0V27.35A600.21,600.21,0,0,0,321.39,56.44Z" class="shape-fill"></path>
-            </svg>
-        </div>
+    <div class="time-unit" id="hours-unit">
+      <div class="number" id="hours"></div>
+      <div class="unit-label">Hour</div>
+    </div>
 
-    </section>
+    <div class="time-unit" id="minutes-unit">
+      <div class="number" id="minutes"></div>
+      <div class="unit-label">Minute</div>
+    </div>
 
-    <div class="spacer layer1"></div>
+    <div class="time-unit" id="seconds-unit">
+      <div class="number" id="seconds"></div>
+      <div class="unit-label">Second</div>
+    </div>
 
-    <section class="dark">
-        <h5>My Mail</h5>
-        <h4>talhacomert28@gmail.com</h4>
-        <h3>My Social Links</h3>
-        <a class="my-links" href="https://github.com/Talha-Fe">
-            <ion-icon name="logo-github"></ion-icon>
-        </a>
-        <a class="my-links" href="https://steamcommunity.com/id/howkedywalk/">
-            <ion-icon name="logo-steam"></ion-icon>
-        </a>
-        <a class="my-links" href="https://instagram.com/tlh.fe">
-            <ion-icon name="logo-instagram"></ion-icon>
+    <div class="time-unit" id="milliseconds-unit">
+      <div class="number" id="milliseconds"></div>
+      <div class="unit-label">Millisecond</div>
+    </div>
+  </div>
 
-    </section>
+  <script>
+    const display = {
+      years: document.getElementById("years"),
+      months: document.getElementById("months"),
+      days: document.getElementById("days"),
+      hours: document.getElementById("hours"),
+      minutes: document.getElementById("minutes"),
+      seconds: document.getElementById("seconds"),
+      milliseconds: document.getElementById("milliseconds")
+    };
 
-    <script type="text/javascript" src="js/script.js"></script>
+    let lastValues = {
+      years: 0,
+      months: 0,
+      days: 0,
+      hours: 0,
+      seconds: 0,
+      milliseconds: 0
+    };
 
-    <script src="https://cdn.jsdelivr.net/npm/typed.js@2.0.12"></script>
+    const now = new Date();
+    const startTime = new Date(now);
 
-    <script>
-        var typed = new Typed(".input", {
-            strings:["Talha Demir.", ""],
-            typeSpeed: 70,
-            backSpeed: 60,
-            loop:true
-        });
-    </script>
+    startTime.setFullYear(startTime.getFullYear() - 20); 
+    const maxDuration = 100 * 365.25 * 24 * 60 * 60 * 1000;
 
+    function addAnimation(element, newValue, oldValue) {
+      if (newValue !== oldValue) {
+        element.classList.add("number-up");
+        setTimeout(() => {
+          element.classList.remove("number-up");
+        }, 500);
+      }
+    }
+
+    function updateTimer() {
+      const now = new Date();
+      let elapsed = now - startTime;
+
+      if (elapsed >= maxDuration) {
+        clearInterval(timer);
+        return;
+      }
+
+      let milliseconds = elapsed % 1000;
+      let totalSeconds = Math.floor(elapsed / 1000);
+      let seconds = totalSeconds % 60;
+      let totalMinutes = Math.floor(totalSeconds / 60);
+      let minutes = totalMinutes % 60;
+      let totalHours = Math.floor(totalMinutes / 60);
+      let hours = totalHours % 24;
+      let totalDays = Math.floor(totalHours / 24);
+      let days = totalDays % 30;
+      let months = Math.floor(totalDays / 30) % 12;
+      let years = Math.floor(totalDays / 365.25);
+
+      addAnimation(display.years, years, lastValues.years);
+      addAnimation(display.months, months, lastValues.months);
+      addAnimation(display.days, days, lastValues.days);
+      addAnimation(display.hours, hours, lastValues.hours);
+      addAnimation(display.seconds, seconds, lastValues.seconds);
+      addAnimation(display.milliseconds, milliseconds, lastValues.milliseconds);
+
+      display.years.textContent = years.toString().padStart(2, '0');
+      display.months.textContent = months.toString().padStart(2, '0');
+      display.days.textContent = days.toString().padStart(2, '0');
+      display.hours.textContent = hours.toString().padStart(2, '0');
+      display.seconds.textContent = seconds.toString().padStart(2, '0');
+      display.milliseconds.textContent = milliseconds.toString().padStart(3, '0');
+
+      lastValues.years = years;
+      lastValues.months = months;
+      lastValues.days = days;
+      lastValues.hours = hours;
+      lastValues.seconds = seconds;
+      lastValues.milliseconds = milliseconds;
+    }
+
+    const timer = setInterval(updateTimer, 10);
+  </script>
 </body>
 </html>
