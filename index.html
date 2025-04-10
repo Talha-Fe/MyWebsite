@@ -1,10 +1,12 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="tr">
 <head>
   <meta charset="UTF-8">
-  <title>Talha Demir</title>
+  <title>the time that I wasted :3 </title>
   <link href="https://fonts.googleapis.com/css2?family=Special+Gothic+Condensed+One&display=swap" rel="stylesheet">
+  <link rel="icon" href="image/text-1727127848259.png" type="image/png">
   <style>
+
     body {
       margin: 0;
       height: 100vh;
@@ -13,12 +15,14 @@
       align-items: center;
       background: #ffffff;
       font-family: 'Special Gothic Condensed One', sans-serif;
+      transition: background-color 0.3s, color 0.3s;
     }
+
 
     .timer {
       display: flex;
       flex-direction: column;
-      align-items: center; 
+      align-items: center;
       gap: 1rem;
     }
 
@@ -38,24 +42,12 @@
       position: relative;
     }
 
-    .upper .number {
-      font-size: 5rem;
-    }
-
-    .middle .number {
-      font-size: 4.5rem;
-    }
-
-    .lower .number {
-      font-size: 3.5rem;
-    }
-
     .unit-label {
       font-size: 1.2rem;
       color: #000000;
     }
 
-   
+
     .number-up, .number-down {
       animation: slideUpDown 0.5s ease-in-out;
     }
@@ -74,19 +66,99 @@
         opacity: 0;
       }
     }
+
+
+    body.dark-mode {
+      background: #000;
+      color: #fff;
+    }
+
+    .dark-mode .number, .dark-mode .unit-label {
+      color: #fff;
+    }
+
+    .dark-mode .unit-label {
+      color: #ccc;
+    }
+
+
+    .dark-mode-toggle {
+      position: fixed;
+      top: 20px;
+      right: 20px;
+      width: 50px;
+      height: 50px;
+      background-color: #222;
+      color: #fff;
+      border-radius: 50%;
+      border: none;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-size: 1.5rem;
+      cursor: pointer;
+      transition: background-color 0.3s, box-shadow 0.3s;
+    }
+
+    .dark-mode-toggle:hover {
+      background-color: #444;
+      box-shadow: 0 6px 8px rgba(0, 0, 0, 0.3);
+    }
+
+
+    .dark-mode-toggle:before {
+      content: "🌙";
+      font-size: 2rem;
+      color: #fff; 
+    }
+
+    /* Responsive stil */
+    @media (max-width: 768px) {
+      .number {
+        font-size: 3rem;
+      }
+
+      .unit-label {
+        font-size: 1rem;
+      }
+
+      .timer {
+        gap: 0.8rem;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .number {
+        font-size: 2.5rem;
+      }
+
+      .unit-label {
+        font-size: 0.8rem;
+      }
+
+      .timer {
+        gap: 0.6rem;
+      }
+    }
+
   </style>
 </head>
 <body>
+  <button class="dark-mode-toggle" id="dark-mode-toggle"></button>
   <div class="timer">
+
     <div class="time-unit" id="years-unit">
       <div class="number" id="years"></div>
       <div class="unit-label">Year</div>
     </div>
 
+
     <div class="time-unit" id="months-unit">
       <div class="number" id="months"></div>
       <div class="unit-label">Month</div>
     </div>
+
 
     <div class="time-unit" id="days-unit">
       <div class="number" id="days"></div>
@@ -98,16 +170,19 @@
       <div class="unit-label">Hour</div>
     </div>
 
+
     <div class="time-unit" id="minutes-unit">
       <div class="number" id="minutes"></div>
       <div class="unit-label">Minute</div>
     </div>
+
 
     <div class="time-unit" id="seconds-unit">
       <div class="number" id="seconds"></div>
       <div class="unit-label">Second</div>
     </div>
 
+ 
     <div class="time-unit" id="milliseconds-unit">
       <div class="number" id="milliseconds"></div>
       <div class="unit-label">Millisecond</div>
@@ -137,7 +212,9 @@
     const now = new Date();
     const startTime = new Date(now);
 
-    startTime.setFullYear(startTime.getFullYear() - 20); 
+
+    startTime.setFullYear(startTime.getFullYear() - 20);  
+
     const maxDuration = 100 * 365.25 * 24 * 60 * 60 * 1000;
 
     function addAnimation(element, newValue, oldValue) {
@@ -170,6 +247,7 @@
       let months = Math.floor(totalDays / 30) % 12;
       let years = Math.floor(totalDays / 365.25);
 
+
       addAnimation(display.years, years, lastValues.years);
       addAnimation(display.months, months, lastValues.months);
       addAnimation(display.days, days, lastValues.days);
@@ -177,12 +255,14 @@
       addAnimation(display.seconds, seconds, lastValues.seconds);
       addAnimation(display.milliseconds, milliseconds, lastValues.milliseconds);
 
+
       display.years.textContent = years.toString().padStart(2, '0');
       display.months.textContent = months.toString().padStart(2, '0');
       display.days.textContent = days.toString().padStart(2, '0');
       display.hours.textContent = hours.toString().padStart(2, '0');
       display.seconds.textContent = seconds.toString().padStart(2, '0');
       display.milliseconds.textContent = milliseconds.toString().padStart(3, '0');
+
 
       lastValues.years = years;
       lastValues.months = months;
@@ -193,6 +273,13 @@
     }
 
     const timer = setInterval(updateTimer, 10);
+
+    const darkModeToggle = document.getElementById("dark-mode-toggle");
+
+    darkModeToggle.addEventListener("click", () => {
+      document.body.classList.toggle("dark-mode");
+    });
+
   </script>
 </body>
 </html>
